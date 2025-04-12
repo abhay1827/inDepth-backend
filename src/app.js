@@ -17,7 +17,7 @@ app.use(cors({
 // And credentials: true ka matlab: ➡️ "Haan bhai, cookies ya headers bhi allow karo is origin se."
 
 
-app.use(express.json())
+app.use(express.json({limit: "16kb"}))
 // Yeh line kehti hai: ➡️ "Agar koi request JSON data bhejti hai, toh usse accept karo — lekin maximum size 16 kilobytes tak hi."
 
 // Real-life example:
@@ -31,7 +31,7 @@ app.use(express.json())
 
 // Safety aur performance ke liye limit rakhna achha hota hai.
 
-app.use(express.urlencoded({extended :true}))
+app.use(express.urlencoded({extended :true,limit: "16kb"}))
 // Breakdown:
 // urlencoded → isse server form data ko samajhta hai.
 
@@ -64,6 +64,7 @@ app.use(express.urlencoded({extended :true}))
 
 app.use(express.static("public"))//yeh batata yeh koi bhi file like 
 // pdf me store krna chahta hu public me
+app.use(cookieParser())
 
 
 import userRouter from "./routes/user.routes.js"
